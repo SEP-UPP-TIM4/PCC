@@ -1,5 +1,6 @@
 package com.sep.pcc.model;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -46,4 +47,9 @@ public class PaymentRequest {
 
     @Setter
     private Currency currency;
+
+    @Setter
+    @Nullable
+    @Builder.Default
+    private Boolean success = null;
 }
