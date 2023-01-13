@@ -19,6 +19,8 @@ public class PccService {
 
     private final RestTemplate restTemplate;
 
+    private static final String BANK_URL = "http://localhost:9009/api/v1/payment/pcc";
+
     public PccService(BankService bankService, PaymentRequestService paymentRequestService, RestTemplate restTemplate) {
         this.bankService = bankService;
         this.paymentRequestService = paymentRequestService;
@@ -30,7 +32,7 @@ public class PccService {
         PaymentRequest paymentRequest = modelMapper.map(dto, PaymentRequest.class);
         paymentRequestService.save(paymentRequest);
         Bank bank = bankService.findById(dto.getPan().substring(0, 5));
-        ResponseDto responseDto = restTemplate.postForObject(bank.getUrl(), dto, ResponseDto.class);
+        ResponseDto responseDto = restTemplate.postForObject(BANK_URL, dto, ResponseDto.class);
         paymentRequest.setSuccess(responseDto.isSuccess());
         paymentRequestService.save(paymentRequest);
         return responseDto;
