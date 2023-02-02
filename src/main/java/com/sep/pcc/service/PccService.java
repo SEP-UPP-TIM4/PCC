@@ -19,7 +19,7 @@ public class PccService {
 
     private final RestTemplate restTemplate;
 
-    private static final String BANK_URL = "http://localhost:9009/api/v1/payment/pcc";
+    private static final String BANK_URL = "http://"+System.getenv("ip_address") + ":9009/api/v1/payment/pcc";
 
     public PccService(BankService bankService, PaymentRequestService paymentRequestService, RestTemplate restTemplate) {
         this.bankService = bankService;
